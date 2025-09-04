@@ -59,17 +59,42 @@ float fraction(float num){
   return fract;
 }
 
-int downShiftFract(int sBase, int eBase, float num){
+string downShiftFract(int sBase, int eBase, float num){
   float p;
-  int bufInt=0;
-  for(int i = 0; i < 10; i++){
+  string bufInt="";
+  int i = 0;
+  while(num!=0){
     num*=eBase; // multiplying number by the base you want
-    bufInt*=10; // move num over
-    bufInt+=(int)num; // adds the whole number (1 or 0) to the end of number in the new base
+    if(num>=1) bufInt.append(to_string((int)num));
+    else bufInt.append("0");
+    //bufInt.append(); // move num over
+    //bufInt+=(int)num; // adds the whole number (1 or 0) to the end of number in the new base
     num = modf(num,&p); // removes that whole number again
+    if(i>100) break;
+    i++;
   }
   return bufInt;
 }
+
+/*std::string downShiftFract(int sBase, int eBase, float num){
+  float p;
+  std::string bufInt="";
+  int i = 0;
+  while(num<1){
+    num*=eBase;
+    if(num>0){
+      bufInt+="0";
+      bufInt+=(char)(int)num;
+      num = modf(num,&p);
+    }
+    else{
+      bufInt+="0";
+    }
+    if(i>100) break;
+    i++;
+  }
+  return bufInt;
+}*/
 
 float upShiftFract(int sBase, int eBase, string sNum, int digits){
   string sNumFract = ".";
