@@ -76,27 +76,7 @@ string downShiftFract(int sBase, int eBase, float num){
   return bufInt;
 }
 
-/*std::string downShiftFract(int sBase, int eBase, float num){
-  float p;
-  std::string bufInt="";
-  int i = 0;
-  while(num<1){
-    num*=eBase;
-    if(num>0){
-      bufInt+="0";
-      bufInt+=(char)(int)num;
-      num = modf(num,&p);
-    }
-    else{
-      bufInt+="0";
-    }
-    if(i>100) break;
-    i++;
-  }
-  return bufInt;
-}*/
-
-float upShiftFract(int sBase, int eBase, string sNum, int digits){
+float upShiftFract(int sBase, int eBase, string sNum, int digits){ //never finished
   string sNumFract = ".";
   sNumFract.append(sNum);
   float num = stof(sNumFract);
