@@ -75,17 +75,25 @@ string downShiftFract(int sBase, int eBase, float num){
   }
   return bufInt;
 }
-
+/*
 float upShiftFract(int sBase, int eBase, string sNum, int digits){ //never finished
   string sNumFract = ".";
   sNumFract.append(sNum);
   float num = stof(sNumFract);
   float buf=0;
   int bufInt=0;
-  cout<<endl;
   for(int i = 0; i < digits; i++){
     num*=10;
     bufInt=num;
+    buf+=(float)((sNum[i]-'0')*pow(sBase,-(i+1)));
+  }
+  return buf;
+}
+*/
+float upShiftFract(int sBase, int eBase, string sNum){
+  string bufInt="";
+  float buf=0;
+  for(int i = 0; i < sNum.length(); i++){
     buf+=(float)((sNum[i]-'0')*pow(sBase,-(i+1)));
   }
   return buf;
@@ -115,12 +123,12 @@ int main() {
   else{
     float sNumF = stof(sNum);
     if(sBase<eBase){
-      int digits = parts[1].length();
-      cout << "digits: " << digits << endl;
-      vector<string>parts2;
-      split(to_string(upShiftFract(sBase, eBase, parts[1],digits)),".", parts2);
-      int newBaseDigits = parts2[1].length();
-      cout << upShiftNum(sBase, eBase, sNumInt) << "." << (upShiftFract(sBase, eBase, parts[1],digits)*pow(eBase,newBaseDigits));
+      int digits = parts[1].length(); // should always be less decimal places than original base so long as base is increased
+      //cout << "digits: " << digits << endl;
+      //vector<string>parts2;
+      //split(to_string(upShiftFract(sBase, eBase, parts[1])),".", parts2);
+      //int newBaseDigits = parts2[1].length();
+      cout << upShiftNum(sBase, eBase, sNumInt) << "." << (upShiftFract(sBase, eBase, parts[1])*pow(eBase,digits));
     }
     else {
       cout << downShiftNum(sBase,eBase,sNumInt) << "." << downShiftFract(sBase,eBase, fraction(sNumF));
